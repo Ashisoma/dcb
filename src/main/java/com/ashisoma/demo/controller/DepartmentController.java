@@ -2,28 +2,36 @@ package com.ashisoma.demo.controller;
 
 import com.ashisoma.demo.entity.Department;
 import com.ashisoma.demo.services.DepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "api/v1/dpt")
 public class DepartmentController {
 
     @Autowired
     private final DepartmentService service;
+
+    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
     public DepartmentController(DepartmentService service) {
         this.service = service;
     }
 
     @PostMapping(value = "/add")
-    public Department saveDepartment(@RequestBody Department department){
+    public Department saveDepartment(@Valid @RequestBody Department department){
+        LOGGER.info("IN THE SAVE DEPT FUNCTION");
         return service.saveDept(department);
     }
 
-    @GetMapping(value = "/")
+    @GetMapping
     public List<Department> getAllDept(){
+        LOGGER.info("IN THE GET DEPT FUNCTION");
         return service.getAllDepartments();
     }
 
@@ -32,8 +40,8 @@ public class DepartmentController {
         return service.getDepartmentsById(id);
     }
 
-    @GetMapping(value = "/name/{name}")
-    public Department getDeptByName(@PathVariable("name") String departmentName){
+    @GetMapping(value = "/name/{departmentName}")
+    public List<Department> getDeptByName(@PathVariable("departmentName") String departmentName){
         return service.getDepartmentsByNamedepartmentName(departmentName);
     }
 
@@ -44,8 +52,7 @@ public class DepartmentController {
     }
 
     @PutMapping(value = "/put/{id}")
-    public Department updateDept(@PathVariable("id") Long id,
-                                                                            @RequestBody Department department){
+    public Department updateDept(@PathVariable("id") Long id, @Valid @RequestBody Department department){
         return service.updateDepartment(id, department);
     }
 

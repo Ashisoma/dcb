@@ -49,7 +49,7 @@ public class DepartmentService {
         return repository.save(dep);
     }
 
-    public Department getDepartmentsByNamedepartmentName(String departmentName) {
-        return repository.findByDepartmentName(departmentName);
+    public List<Department> getDepartmentsByNamedepartmentName(String departmentName) {
+        return repository.findByDepartmentNameContainsIgnoreCaseAllIgnoreCase(departmentName);
     }
 }
