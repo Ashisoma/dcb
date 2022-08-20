@@ -42,7 +42,7 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/name/{departmentName}")
-    public List<Department> getDeptByName(@PathVariable("departmentName") String departmentName){
+    public Department getDeptByName(@PathVariable("departmentName") String departmentName){
         return service.getDepartmentsByNamedepartmentName(departmentName);
     }
 

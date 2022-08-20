@@ -15,5 +15,8 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
     List<Department> findByDepartmentNameContainsIgnoreCaseAllIgnoreCase(String departmentName);
 
     @Query("select d from Department d where upper(d.departmentName) = upper(?1)")
+    Department findByDepartmentNameAllIgnoreCase(String departmentName);
+
+    @Query("select d from Department d where upper(d.departmentName) = upper(?1)")
     List<Department> findByDepartmentNameIgnoreCaseAllIgnoreCase(String departmentName);
 }

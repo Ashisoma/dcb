@@ -56,7 +56,7 @@ public class DepartmentService {
         return repository.save(dep);
     }
 
-    public List<Department> getDepartmentsByNamedepartmentName(String departmentName) {
-        return repository.findByDepartmentNameContainsIgnoreCaseAllIgnoreCase(departmentName);
+    public Department getDepartmentsByNamedepartmentName(String departmentName) {
+        return repository.findByDepartmentNameAllIgnoreCase(departmentName);
     }
 }
