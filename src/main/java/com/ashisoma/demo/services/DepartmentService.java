@@ -1,12 +1,15 @@
 package com.ashisoma.demo.services;
 
 import com.ashisoma.demo.entity.Department;
+import com.ashisoma.demo.error.DeptNotFoundException;
 import com.ashisoma.demo.repos.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentService {
@@ -26,8 +29,12 @@ public class DepartmentService {
         return repository.findAll();
     }
 
-    public Department getDepartmentsById(Long id) {
-        return repository.findById(id).get();
+    public Department getDepartmentsById(Long id) throws DeptNotFoundException {
+        Optional<Department> department =  repository.findById(id);
+        if (!department.isPresent()){
+            throw new DeptNotFoundException("Department Not Available");
+        }
+        return department.get();
     }
 
     public void deleteById(Long id) {

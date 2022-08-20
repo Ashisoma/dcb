@@ -1,6 +1,7 @@
 package com.ashisoma.demo.controller;
 
 import com.ashisoma.demo.entity.Department;
+import com.ashisoma.demo.error.DeptNotFoundException;
 import com.ashisoma.demo.services.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/{id}")
-    public Department getDeptById(@PathVariable("id") Long id){
+    public Department getDeptById(@PathVariable("id") Long id) throws DeptNotFoundException {
         return service.getDepartmentsById(id);
     }
 
