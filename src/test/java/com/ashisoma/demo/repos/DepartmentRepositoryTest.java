@@ -36,5 +36,12 @@ class DepartmentRepositoryTest {
         assertEquals(department.getDepartmentName(), "MECH-ENG");
     }
 
+    @Test
+    public void findByDepartmentNameAllIgnoreCase(){
+        Department department = repository.findByDepartmentNameAllIgnoreCase("MECH-ENG");
+        assertEquals(department.getDepartmentName(), "MECH-ENG");
+
+    }
+
 
 }
